@@ -4,7 +4,8 @@
  * Description: A shortcode to search and display Gravity Forms entries based on specified criteria and attributes.
  * Version: 1.0.0
  * Author: BrightLeaf Digital
- * Author URI: https://digital.brightleaf.info/
+ * Author URI: https://brightleafdigital.io/
+ * Plugin URI: https://brightleafdigital.io/gravityops-search/
  * License: GPL-2.0+
  */
 

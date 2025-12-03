@@ -2,7 +2,7 @@
 Contributors: eitanatbrightleaf
 Tags: gravity forms, display form entries, frontend entry search, shortcode results display, form data lookup
 Requires at least: 6.5
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 8.0
 Stable tag: 1.0.1
 License: GPLv2

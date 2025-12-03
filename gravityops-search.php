@@ -1,6 +1,6 @@
 <?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
- * Plugin Name: GravityOps Search
+ * Plugin Name: GravityOps Search - Search and Display Gravity Forms Entries
  * Description: A shortcode to search and display Gravity Forms entries based on specified criteria and attributes.
  * Version: 1.0.1
  * Author: BrightLeaf Digital

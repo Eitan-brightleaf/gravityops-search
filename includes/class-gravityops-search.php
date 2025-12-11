@@ -91,19 +91,7 @@ class GravityOps_Search extends GFAddOn {
 		add_action(
             'admin_menu',
             function () {
-				SuiteMenu::ensure_parent_menu();
-                $cap = current_user_can( 'gform_full_access' ) ? 'gform_full_access' : 'gravityforms_view_entries';
-                add_submenu_page(
-                    'gravity_ops',
-                    $this->_short_title,
-                    $this->_short_title,
-                    $cap,
-                    $this->_slug,
-                    [
-                        $this,
-                        'create_sub_menu',
-                    ]
-                );
+
 			}
         );
         $review_prompter = new ReviewPrompter(

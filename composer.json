@@ -1,7 +1,7 @@
 {
   "name": "gravityops/search",
   "require": {
-    "gravityops/core": ">=1.0.14"
+    "gravityops/core": ">=1.0.18"
   },
   "repositories": [
     {

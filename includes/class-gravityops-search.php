@@ -4,6 +4,7 @@ use GOS\GravityOps\Core\Admin\ReviewPrompter;
 use GOS\GravityOps\Core\Admin\SettingsHeader;
 use GOS\GravityOps\Core\Admin\SuiteMenu;
 use GOS\GravityOps\Core\Admin\SurveyPrompter;
+use GOS\GravityOps\Core\Admin\AdminShell;
 use GOS\GravityOps\Core\Utils\AssetHelper;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -87,11 +88,10 @@ class GravityOps_Search extends GFAddOn {
 	 * @return void This method does not return any value.
 	 */
 	public function init_admin() {
-		parent::init_admin();
+        parent::init_admin();
 		add_action(
             'admin_menu',
             function () {
-
 			}
         );
         $review_prompter = new ReviewPrompter(
@@ -108,8 +108,37 @@ class GravityOps_Search extends GFAddOn {
 			$this->_version,
 			'free'
 		);
-		$survey_prompter->init();
-	}
+        $survey_prompter->init();
+
+        // Register the GravityOps AdminShell page for GravityOps Search (free).
+        // Tabs: Overview (render), Help (render), Affiliation (external link)
+        AdminShell::instance()->register_plugin_page(
+            $this->_slug,
+            [
+                'title'      => $this->_title,
+                'menu_title' => $this->_short_title,
+                'subtitle'   => '',
+                'links'      => [],
+                'tabs'       => [
+                    'overview'    => [
+                        'label'    => 'Overview',
+                        'type'     => 'render',
+                        'callback' => [ $this, 'gops_render_overview' ],
+                    ],
+                    'help'        => [
+                        'label'    => 'Help',
+                        'type'     => 'render',
+                        'callback' => [ $this, 'gops_render_help' ],
+                    ],
+                    'affiliation' => [
+                        'label' => 'Affiliation',
+                        'type'  => 'link',
+                        'url'   => 'https://brightleafdigital.io/affiliate/',
+                    ],
+                ],
+            ]
+        );
+    }
 
 	/**
 	 * Retrieves the SVG icon for the application menu in a base64-encoded string.
@@ -124,11 +153,38 @@ class GravityOps_Search extends GFAddOn {
     }
 
 	/**
-	 * Creates a submenu for the plugin in the WordPress admin dashboard.
-	 */
-	public function create_sub_menu() {
-		echo '<h1 style="padding-left: 15px;">GravityOps Search is your infinitely customizable VLOOKUP for Gravity Forms!</h1>
-		<p style="padding-left: 15px; font-size: large">For more information and plugin documentation, visit our <a href="https://brightleafdigital.io/gravityops-search/" target="_blank">plugin page</a>.</p>';
+     * Render: GravityOps → Search → Overview
+     */
+    public function gops_render_overview() {
+        echo '<div class="gops-card gops-card--brand">';
+        echo '<h2 class="gops-title" style="margin:0 0 8px;">Overview</h2>';
+        echo '<p>GravityOps Search lets you look up and display Gravity Forms entry data anywhere using simple shortcodes.
+                 Think of it as an infinitely customizable VLOOKUP for your forms.</p>';
+        echo '<ul style="margin:8px 0 0 18px;">';
+        echo '<li>Search across one or many entries and return specific fields.</li>';
+        echo '<li>Combine fields, control sorting, and format output.</li>';
+        echo '<li>Use in notifications, confirmations, or front‑end content.</li>';
+        echo '</ul>';
+        echo '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">';
+        echo '<a class="button button-primary" target="_blank" rel="noopener" href="https://brightleafdigital.io/gravityops-search/">Learn More</a>';
+        echo '<a class="button" target="_blank" rel="noopener" href="https://brightleafdigital.io/gravityops-search/#docs">Docs</a>';
+        echo '</div>';
+        echo '</div>';
+    }
+
+    /**
+     * Render: GravityOps → Search → Help
+     */
+    public function gops_render_help() {
+        AdminShell::render_help_tab(
+            [
+                'Learn More'             => 'https://brightleafdigital.io/gravityops-search/',
+                'Docs'                   => 'https://brightleafdigital.io/gravityops-search/#docs',
+                'Community forum'        => 'https://brightleafdigital.io/community/',
+                'Open a support request' => 'https://brightleafdigital.io/support/',
+                'Join the community'     => 'https://brightleafdigital.io/plugintomember',
+            ]
+        );
     }
 
 	/**

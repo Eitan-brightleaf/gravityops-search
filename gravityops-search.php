@@ -2,7 +2,7 @@
 /**
  * Plugin Name: GravityOps Search - Search and Display Gravity Forms Entries
  * Description: A shortcode to search and display Gravity Forms entries based on specified criteria and attributes.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: BrightLeaf Digital
  * Author URI: https://brightleafdigital.io/
  * Plugin URI: https://brightleafdigital.io/gravityops-search/

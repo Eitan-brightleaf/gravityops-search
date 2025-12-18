@@ -1,11 +1,11 @@
 <?php
 
 use GOS\GravityOps\Core\Admin\ReviewPrompter;
-use GOS\GravityOps\Core\Admin\SettingsHeader;
 use GOS\GravityOps\Core\Admin\SuiteMenu;
 use GOS\GravityOps\Core\Admin\SurveyPrompter;
 use GOS\GravityOps\Core\Admin\AdminShell;
 use GOS\GravityOps\Core\Utils\AssetHelper;
+use function GOS\GravityOps\Core\Admin\gravityops_shell;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -112,7 +112,7 @@ class GravityOps_Search extends GFAddOn {
 
         // Register the GravityOps AdminShell page for GravityOps Search (free).
         // Tabs: Overview (render), Help (render), Affiliation (external link)
-        AdminShell::instance()->register_plugin_page(
+        gravityops_shell()->register_plugin_page(
             $this->_slug,
             [
                 'title'      => $this->_title,

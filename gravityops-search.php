@@ -17,8 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
-// Ensure vendor-prefixed classes are also available early for provider instantiation.
-require_once __DIR__ . '/vendor-prefixed/autoload.php';
 
 // Instantiate this plugin's copy of the AdminShell early so provider negotiation can happen on plugins_loaded.
 add_action(
@@ -46,7 +44,6 @@ add_action(
         if ( ! method_exists( 'GFForms', 'include_addon_framework' ) ) {
             return;
         }
-	    require_once __DIR__ . '/vendor-prefixed/autoload.php';
 	    GFForms::include_addon_framework();
         require_once 'includes/class-gravityops-search.php';
         GFAddOn::register( 'GravityOps_Search' );
@@ -58,6 +55,6 @@ add_action(
 add_filter(
     'gravityops_assets_base_url',
     function ( $url ) {
-        return $url ?: plugins_url( 'vendor-prefixed/gravityops/core/assets/', __FILE__ );
+        return $url ?: plugins_url( 'vendor/GOS/gravityops/core/assets/', __FILE__ );
     }
 );

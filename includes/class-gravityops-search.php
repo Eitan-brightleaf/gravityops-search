@@ -1,11 +1,11 @@
 <?php
 
-use GOS\GravityOps\Core\Admin\ReviewPrompter;
-use GOS\GravityOps\Core\Admin\SuiteMenu;
-use GOS\GravityOps\Core\Admin\SurveyPrompter;
-use GOS\GravityOps\Core\Admin\AdminShell;
-use GOS\GravityOps\Core\Utils\AssetHelper;
-use function GOS\GravityOps\Core\Admin\gravityops_shell;
+use GravityOps\Core\Admin\ReviewPrompter;
+use GravityOps\Core\Admin\SuiteMenu;
+use GravityOps\Core\Admin\SurveyPrompter;
+use GravityOps\Core\Admin\AdminShell;
+use GravityOps\Core\Utils\AssetHelper;
+use function GravityOps\Core\Admin\gravityops_shell;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class GravityOps_Search extends GFAddOn {
 
     // phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
-    use GOS\GravityOps\Core\Traits\SingletonTrait;
+    use GravityOps\Core\Traits\SingletonTrait;
 
     /**
      * The current version of the plugin
@@ -149,7 +149,7 @@ class GravityOps_Search extends GFAddOn {
 	 * @return string The base64-encoded SVG icon as a data URL.
 	 */
 	public function get_app_menu_icon() {
-        return SuiteMenu::get_icon();
+        return SuiteMenu::get_plugin_icon_url( $this->_slug ) ?: 'dashicons-search';
     }
 
 	/**

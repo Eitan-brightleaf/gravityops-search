@@ -29,7 +29,8 @@
       "classmap_prefix": "GOS_",
       "constant_prefix": "GOS_",
       "packages": [
-        "gravityops/core"
+        "gravityops/core",
+        "trustedlogin/client"
       ],
       "delete_vendor_packages": true,
       "update_call_sites": [

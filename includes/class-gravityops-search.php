@@ -1,11 +1,7 @@
 <?php
 
-use GravityOps\Core\Admin\ReviewPrompter;
-use GravityOps\Core\Admin\SuiteMenu;
-use GravityOps\Core\Admin\SurveyPrompter;
-use GravityOps\Core\Admin\AdminShell;
+use GravityOps\Core\SuiteCore\SuiteCore;
 use GravityOps\Core\Utils\AssetHelper;
-use function GravityOps\Core\Admin\gravityops_shell;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -94,7 +90,7 @@ class GravityOps_Search extends GFAddOn {
             function () {
 			}
         );
-        $review_prompter = new ReviewPrompter(
+        $review_prompter = SuiteCore::instance()->review_prompter(
 			$this->prefix,
 			$this->_title,
 			'https://wordpress.org/support/plugin/gravityops-search/reviews/#new-post'
@@ -102,7 +98,7 @@ class GravityOps_Search extends GFAddOn {
 		$review_prompter->init();
 		$review_prompter->maybe_show_review_request( $this->get_usage_count(), 10 );
 
-        $survey_prompter = new SurveyPrompter(
+        $survey_prompter = SuiteCore::instance()->survey_prompter(
 			$this->prefix,
 			$this->_title,
 			$this->_version,
@@ -112,7 +108,7 @@ class GravityOps_Search extends GFAddOn {
 
         // Register the GravityOps AdminShell page for GravityOps Search (free).
         // Tabs: Overview (render), Help (render), Affiliation (external link)
-        gravityops_shell()->register_plugin_page(
+        SuiteCore::instance()->shell()->register_plugin_page(
             $this->_slug,
             [
                 'title'      => $this->_title,
@@ -149,7 +145,7 @@ class GravityOps_Search extends GFAddOn {
 	 * @return string The base64-encoded SVG icon as a data URL.
 	 */
 	public function get_app_menu_icon() {
-        return SuiteMenu::get_plugin_icon_url( $this->_slug ) ?: 'dashicons-search';
+        return SuiteCore::instance()->suite_menu()->get_plugin_icon_url( $this->_slug ) ?: 'dashicons-search';
     }
 
 	/**
@@ -176,7 +172,7 @@ class GravityOps_Search extends GFAddOn {
      * Render: GravityOps → Search → Help
      */
     public function gops_render_help() {
-        AdminShell::render_help_tab(
+        SuiteCore::instance()->shell()->render_help_tab(
             [
                 'Learn More'             => 'https://brightleafdigital.io/gravityops-search/',
                 'Docs'                   => 'https://brightleafdigital.io/gravityops-search/#docs',

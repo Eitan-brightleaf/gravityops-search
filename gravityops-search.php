@@ -10,7 +10,7 @@
  */
 
 // If this file is called directly, abort.
-use function GravityOps\Core\Admin\gravityops_shell;
+use GravityOps\Core\SuiteCore\SuiteCore;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,11 +22,30 @@ if ( file_exists( __DIR__ . '/vendor/GOS/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/GOS/autoload.php';
 }
 
-// Instantiate this plugin's copy of the AdminShell early so provider negotiation can happen on plugins_loaded.
+// Register this plugin with SuiteCore early so the latest provider can be selected.
 add_action(
     'plugins_loaded',
     function () {
-	    gravityops_shell();
+        $assets_base_url = '';
+        if ( file_exists( __DIR__ . '/vendor/GOS/gravityops/core/assets/' ) ) {
+            $assets_base_url = plugins_url( 'vendor/GOS/gravityops/core/assets/', __FILE__ );
+        } else {
+            $assets_base_url = plugins_url( 'vendor/gravityops/core/assets/', __FILE__ );
+        }
+
+	    SuiteCore::register(
+            __FILE__,
+            [
+                'slug'           => 'gravityops_search',
+                'name'           => 'GravityOps Search',
+                'description'    => 'Supercharge search across Gravity Forms entries.',
+                'marketing_url'  => 'https://brightleafdigital.io/gravityops-search/',
+                'docs_url'       => 'https://brightleafdigital.io/gravityops-search/#docs',
+                'is_free'        => true,
+                'icon_filename'  => 'search-icon.svg',
+                'assets_base_url' => $assets_base_url,
+            ]
+        );
     },
     1
 );
@@ -53,20 +72,4 @@ add_action(
         GFAddOn::register( 'GravityOps_Search' );
     },
     5
-);
-
-// Ensure GravityOps shared assets resolve when library is vendor-installed in this plugin.
-add_filter(
-    'gravityops_assets_base_url',
-    function ( $url ) {
-        if ( $url ) {
-            return $url;
-        }
-
-        if ( file_exists( __DIR__ . '/vendor/GOS/gravityops/core/assets/' ) ) {
-            return plugins_url( 'vendor/GOS/gravityops/core/assets/', __FILE__ );
-        }
-
-        return plugins_url( 'vendor/gravityops/core/assets/', __FILE__ );
-    }
 );

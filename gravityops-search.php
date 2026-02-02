@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'GRAVITYOPS_SEARCH_BASENAME', plugin_basename( __FILE__ ) );
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 if ( file_exists( __DIR__ . '/vendor/GOS/autoload.php' ) ) {
@@ -34,15 +36,8 @@ add_action(
         }
 
 	    SuiteCore::register(
-            __FILE__,
+            GRAVITYOPS_SEARCH_BASENAME,
             [
-                'slug'           => 'gravityops_search',
-                'name'           => 'GravityOps Search',
-                'description'    => 'Supercharge search across Gravity Forms entries.',
-                'marketing_url'  => 'https://brightleafdigital.io/gravityops-search/',
-                'docs_url'       => 'https://brightleafdigital.io/gravityops-search/#docs',
-                'is_free'        => true,
-                'icon_filename'  => 'search-icon.svg',
                 'assets_base_url' => $assets_base_url,
             ]
         );
